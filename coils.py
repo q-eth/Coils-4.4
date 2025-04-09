@@ -50,12 +50,7 @@ def plot_field(solenoids, title):
     Bx, By = magnetic_field(X, Y, solenoids)
     
     plt.figure(figsize=(7, 7))
-    plt.streamplot(X, Y, Bx, By, color=np.hypot(Bx, By), linewidth=1, density=2, arrowstyle='->', arrowsize=1.5)
-#solenoid rectangles
-    #plt.gca().add_patch(plt.Rectangle((-0.025, 0.025), 0.05, 0.1, edgecolor='black', facecolor='none'))
-    #plt.gca().add_patch(plt.Rectangle((-0.025, -0.125), 0.05, 0.1, edgecolor='black', facecolor='none'))
-    #plt.gca().add_patch(plt.Rectangle((0.025, -0.025), 0.1, 0.05, edgecolor='black', facecolor='none'))
-    #plt.gca().add_patch(plt.Rectangle((-0.125, -0.025), 0.1, 0.05, edgecolor='black', facecolor='none'))
+    plt.streamplot(X, Y, Bx, By, color=np.hypot(Bx, By), cmap='plasma', linewidth=1, density=2, arrowstyle='->', arrowsize=1.5)
 
     plt.title(title)
     plt.xlabel('X (м)')
@@ -76,11 +71,11 @@ solenoids_same = [
 ]
 
 solenoids_quad = [
-    (0, d, length, radius, current, 1),
+    (0, d, length, radius, current, -1),
     (0, -d, length, radius, current, -1),
-    (d, 0, length, radius, current, -1),
+    (d, 0, length, radius, current, 1),
     (-d, 0, length, radius, current, 1)
 ]
 
-plot_field(solenoids_same, "Магнитное поле: все токи в одном направлении (XY плоскость)")
-plot_field(solenoids_quad, "Магнитное поле: квадрупольная линза (XY плоскость)")
+plot_field(solenoids_same, "Magnetic field distribution - all surrents have same direction")
+plot_field(solenoids_quad, "Magnetic field distribution - quadrupole")
